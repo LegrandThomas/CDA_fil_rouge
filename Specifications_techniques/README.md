@@ -1,7 +1,7 @@
 # Spécifications techniques
 
 - [Découpage de l'application en couche N-tiers](./architecture_N-tiers.md).
-- Questions globales
+- [Questions globales](./questions-globales.md)
   
 ## Back-end
 
