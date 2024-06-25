@@ -1,9 +1,8 @@
 # Stratégie de sécurisation du Front-End
 
-
 ## Introduction
 
-Nous avons choisi de développer le Front-End de notre application Beginners App Dev avec Next et TypeScript. La sécurisation de cette partie est cruciale pour protéger les données des utilisateurs et garantir la sécurité des interactions. La partie front-end permet de vérifier les entrées utilisateur dont on doit toujours se méfier. 
+Nous avons choisi de développer le Front-End de notre application Beginners App Dev avec Next et TypeScript. La sécurisation de cette partie est cruciale pour protéger les données des utilisateurs et garantir la sécurité des interactions. La partie front-end permet de vérifier les entrées utilisateur dont on doit toujours se méfier.
 
 ### Chiffrement des communications (HTTPS/TLS/HSTS)
 
@@ -42,9 +41,10 @@ Limitez les tentatives de connexion infructueuses pour prévenir les attaques pa
 
 ([cf. Politique des mots de passes](./securisation-bdd.md#politique-des-mots-de-passe))
 
-
-___
+---
 
 ## Conclusion
 
 En appliquant ces mesures de sécurité pour la partie Front-End de notre application, nous réduisons le champ d'attaque potentiel. Cette stratégie sera réévaluée régulièrement pour répondre aux Vulnérabilités exposées connues (CVE) et aux changements technologiques.
+
+[🔙 Retour à la Table des matières](../README.md)

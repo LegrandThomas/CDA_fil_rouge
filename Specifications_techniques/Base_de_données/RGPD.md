@@ -20,3 +20,5 @@ Dans notre engagement à garantir la confidentialité et la sécurité des donn�
   Nous informerons sans délai les autorités compétentes (CNIL) et les utilisateurs impactés, respectant un délai de 72 heures. Mise en place d’un formulaire de demande d’accès.
 
 Ces mesures assurent non seulement la conformité réglementaire mais renforcent également notre engagement envers la sécurité et la transparence dans le traitement des données personnelles.
+
+[🔙 Retour à la Table des matières](../README.md)

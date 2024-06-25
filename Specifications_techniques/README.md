@@ -5,39 +5,39 @@
 
 ## Back-end
 
-### Base de donnée
+### Base de données
 
-- [RGPD](./RGPD.md)
-- [Stratégie de sécurisation BDD](./securisation-bdd.md)
-- [Choix de base de données](choix-bdd.md)
-- [MCD](./mcd.md)
-- [MLD](./mld.md)
-- [MPD](./mpd.md)
-- [Dictionnaire de données](./dictionnaire-donnees.md)
+- [RGPD](./Base_de_données/RGPD.md)
+- [Stratégie de sécurisation BDD](./Base_de_données/securisation-bdd.md)
+- [Choix de base de données](./Base_de_données/choix-bdd.md)
+- [MCD](./Base_de_données/mcd.md)
+- [MLD](./Base_de_données/mld.md)
+- [MPD](./Base_de_données/script-BDD.md)
+- [Dictionnaire de données](./Base_de_données/dictionnaire-donnees.md)
 
 ### API
 
-- [Stratégie de sécurisation API](./securisation-api.md)
-- [Choix stack API](choix-stack-api.md)
-- [Diagramme de cas d'utilisation](./cas-utilisation.md)
-- [Diagramme d'activité](./diagramme-activite.md)
-- [Diagramme de séquence](./diagramme-sequence.md)
-- [Diagramme de classe](./diagramme-classe.md)
+- [Stratégie de sécurisation API](./API/securisation-api.md)
+- [Choix stack API](./API/choix-stack-api.md)
+- [Diagramme de cas d'utilisation](./API/cas-utilisation.md)
+- [Diagramme d'activité](./API/diagramme-activite.md)
+- [Diagramme de séquence](./API/diagramme-sequence.md)
+- [Diagramme de classe](./API/diagramme-classe.md)
 
 ## Clients
 
 ### Front-end
 
-- [Stratégie de sécurisation front](./securisation-front.md)
-- [Choix stack front](choix-stack-front.md)
-- [Wireframes](./wireframes.md)
-- [Mockups](./mockups.md)
+- [Stratégie de sécurisation front](./Front-end/securisation-front.md)
+- [Choix stack front](./Front-end/choix-stack-front.md)
+- [Wireframes](./Front-end/wireframes.md)
+- [Mockups](./Front-end/mockups.md)
 
 ### mobile
 
-- [Stratégie de sécurisation mobile](./securisation-mobile.md)
-- [Choix stack mobile](choix-stack-mobile.md)
-- [Wireframes](./wireframes-mobile.md)
-- [Mockups](./mockups-mobile.md)
+- [Stratégie de sécurisation mobile](./Mobile/securisation-mobile.md)
+- [Choix stack mobile](./Mobile/choix-stack-mobile.md)
+- [Wireframes](./Mobile/wireframes-mobile.md)
+- [Mockups](./Mobile/mockups-mobile.md)
 
 [🔙 Retour à la Table des matières](../README.md)
