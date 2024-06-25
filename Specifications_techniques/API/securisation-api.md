@@ -70,9 +70,10 @@ Système qui assigne des permissions aux utilisateurs en fonction des rôles qu'
 **Sécurité** : Des mesures robustes seront implémentées pour protéger les données contre les accès non autorisés et les pertes.  
 **Politique de Confidentialité** : Une politique claire et accessible décrira la gestion des données personnelles et les droits des utilisateurs.
 
-___
+---
 
-## Conclusion 
+## Conclusion
 
+En appliquant ces mesures de sécurité, nous réduisons les failles de sécurité qui peuvent survenir et nous réduisons le risque d'indisponibilité des services. Cette stratégie sera réévaluée régulièrement pour répondre aux Vulnérabilités exposées connues (CVE) et aux changements technologiques.
 
-En appliquant ces mesures de sécurité, nous réduisons les failles de sécurité qui peuvent survenir et nous réduisons le risque d'indisponibilité des services. Cette stratégie sera réévaluée régulièrement pour répondre aux Vulnérabilités exposées connues (CVE) et aux changements technologiques. 
+[🔙 Retour à la Table des matières](../README.md)
