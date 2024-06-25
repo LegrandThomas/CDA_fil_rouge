@@ -15,8 +15,6 @@ Ce dossier de projet a pour objectif de démontrer la maîtrise des compétences
 7. [Veille](Veille/Veille.md)
 8. [Et si c'était à refaire?](Retrospective/retrospective.md)
 
-
-
 ## Liste des compétences du référentiel qui sont couvertes par le projet
 
-![Competences](Assets/Competences.png)
+![Competences du référentiel](Assets/Images/Competences.png)
