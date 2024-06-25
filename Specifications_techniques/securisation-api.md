@@ -2,132 +2,77 @@
 
 ## Introduction
 
-Dans le cadre de la réalisation de notre application nous avons fait le choix de centraliser tous les enregistrements grâce à une API (interface de programmation d'application). Cette API aura à traiter des données personnelles sensibles de nos utilisateurs comme en autres leurs nom, leurs adresses e-mail, leurs notes, …
+Dans le cadre de la réalisation de notre application nous avons fait le choix de centraliser tous les enregistrements grâce à une API (interface de programmation d'application). Cette API aura à traiter des données personnelles de nos utilisateurs comme leurs pseudos et mot de passes. L'authentification donnera accés à des ressources de la plateforme.
 
-Ces informations soulèvent des questions de sécurité quant à la protection de ces informations contre l’accès et l’utilisation non autorisée. En appliquant les recommandation de l’ainsi et en suivant le concepte des trois piliers nous pourrions être en mesure de réduire la possibilité à des personnes malveillante d'accéder à ses données.
-
-## Liste de recommandation à appliquer
-
-R1 - Utilisation de TLS
-R2 - Mettre en œuvre HSTS
-R3 - Surveiller les CT logs
-R6 - Expliciter la nature d'une ressource avec l'en-tête Content-Type
-R7 - Vérifier l'échappement des contenus inclus
-R8 - Vérifier la conformité des données issues de sources externes
-R9 - Proscrire l'usage de la fonction eval()
-R10 - Proscrire l'usage de constructions basées sur l'évaluation de code
-R11 - Contrôler l'intégrité des contenus internes
-R12 - Contrôler l'intégrité des contenus tiers
-R13 - Restreindre les contenus aux ressources fiables
-R21 - Définir la stratégie de construction de l’en-tête Referer
-R26 - Ne pas stocker d’informations sensibles dans les cookies
-R31 - Limiter le transit des cookies aux flux sécurisés
-R32 - Définir une stratégie stricte d’envoi des cookies en cross-site
-R35 - Choisir une API selon sa méthode HTTP
-R38 - Protéger les appels XHR par un contrôle anti-CSRF
-R39 - Mettre en œuvre un preflight lors des appels CORS
-R40 - Vérifier la valeur de l’Origin lors de la réception d’une requête CORS
-R41 - Cloisonner les services web au moyen de noms de domaine distincts
-R61 -  Limiter les composants logiciels tiers
-R62 - Maintenir à jour les composants logiciels tiers utilisés
-R63 - Ne pas modifier le cœur des composants logiciels tiers utilisés
+Ces informations soulèvent des questions de sécurité quant à la protection de ces informations contre l’accès et l’utilisation non autorisée. La couche de l'API sera renforcé en appliquant les recommandations de l'ANSSI et en suivant le concept des trois piliers : <strong>Anticiper</strong> les menaces et vulnérabilité, <strong>prévenir</strong> les vulnérabilités en étant pro-actif, <strong>réagir</strong> aux menaces en répondant de manière approprié et en améliorant la sécurité future de l'application.
 
 ## Politique de sécurisation
 
-### Sécurisation des Communications
+### Authentification et Gestion des Sessions avec OAuth 2.0 et JWT
 
-- Utilisation du TLS
+Sécurisez les APIs en utilisant **OAuth 2.0** pour l’authentification et les JSON Web Tokens (**JWT**) pour la gestion des sessions.
+Sécurisez les APIs en utilisant **OAuth 2.0** pour l’authentification et les JSON Web Tokens (**JWT**) pour la gestion des sessions.
 
-Il est crucial de chiffrer les communications entre le client et le serveur pour protéger les données en transit. Pour ce faire, il faut implémenter le TLS (Transport Layer Security) en utilisant des certificats SSL/TLS. Cela garantit que les données échangées restent confidentielles et intégrales.
+**OAuth 2.0 et JWT** : Bien que mentionnés dans la gestion des sessions, leur application aux APIs assure une couche supplémentaire de sécurité pour l'authentification et la gestion des autorisations, adaptée aux interactions entre services.
 
-- Mettre en oeuvre du HSTS
+- **Tokens et JWT** : Nous utilisons ces méthodes pour assurer des sessions sécurisées avec des identifiants uniques et des données codées, permettant une gestion stateless qui augmente la scalabilité et la performance.
 
-Pour renforcer l'utilisation de connexions sécurisées, le HTTP Strict Transport Security (HSTS) doit être configuré. Cette politique force les navigateurs à toujours utiliser HTTPS, empêchant les connexions non sécurisées.
+**Validation et Sanitization des Requêtes API**:
 
-- Limiter le transit des cookies aux flux sécurisés
+Assurez-vous que chaque requête API soit scrutée pour valider et assainir son contenu, ciblant efficacement les tentatives d’injections **SQL** et **XSS**.
+Assurez-vous que chaque requête API soit scrutée pour valider et assainir son contenu, ciblant efficacement les tentatives d’injections **SQL** et **XSS**.
 
-Garantir que les cookies sont envoyés uniquement sur des connexions HTTPS, en utilisant l'attribut Secure pour protéger les informations sensibles en transit.
+**Chiffrement des communications**:
 
-### Protection contre les Attaques et Vulnérabilités
+Nous renforcerons la sécurité des données en transit entre le serveur et le client en mettant en place des tunnels sécurisés. Le protocole HTTPS, associé aux standards de sécurité **TLS** (Transport Layer Security) et **HSTS** (HTTP Strict Transport Security), garantira que toutes les communications dont la première entre l'application et nos serveurs seront chiffrées forçant l’utilisation de HTTPS.  
+Cela protégera les données des utilisateurs contre les interceptions malveillantes et assurera la confidentialité des informations échangées, même sur des réseaux moins sécurisés.
 
-- Surveiller les CT logs
+**Limitation du Taux de Requêtes (Rate Limiting)**:
 
-Les logs de Transparency Certificate (CT) permettent de détecter des certificats non autorisés. Utilisez des services de surveillance des CT logs peut assurer qu'aucun certificat frauduleux n'a été émis pour votre domaine.
+Mettez en place des contrôles stricts sur le nombre de requêtes acceptées pour prévenir les attaques par déni de service (DoS).
 
-- Échapper les contenus inclus
+### Gestion des Identités Utilisateurs avec les UUID
 
-Pour éviter les attaques de type Cross-Site Scripting (XSS), Il faut s’assurer que tous les contenus inclus dans les réponses HTML sont correctement échappés. Cela empêche l'injection de scripts malveillants.
+Nous utiliserons des **UUID** (Universally Unique IDentifiers) pour renforcer la sécurité et la confidentialité des données des utilisateurs. Les UUID, générés de manière aléatoire, rendront difficile la prédiction des identifiants et contribueront à la protection contre les tentatives d'accès non autorisé.
 
-- Valider les données externes
+### Transmission Sécurisée des Mots de Passe
 
-Toutes les données provenant de sources externes doivent être validées et nettoyées avant utilisation. Cela prévient les attaques par injection et autres vulnérabilités liées aux données non fiables.
+Assurez-vous que les mots de passe sont toujours transmis de manière sécurisée, en utilisant des connexions HTTPS pour éviter les interceptions
 
-- Protéger les appels XHR contre les attaques CSRF
+### Journalisation des Requêtes API
 
-L’implémentation de tokens CSRF pour sécuriser les requêtes XHR (XMLHttpRequest). Ces tokens vérifient que les requêtes proviennent de sources autorisées.
+Enregistrez chaque appel API, y compris les détails de la requête tels que l’adresse IP source, les paramètres de requête, les en-têtes, et les réponses. Cela permet de tracer les actions à travers l’API et de détecter des anomalies comme des tentatives d’injection ou des abus de l’API.
 
-- Préflight pour les appels CORS
+### Visualisation des end-points API via Swagger
 
-La configuration des pré-requêtes CORS (Cross-Origin Resource Sharing) valide les requêtes cross-origin avant leur exécution. Cela empêche les requêtes malveillantes d'accéder aux ressources.
+Ensemble de règles et d’outils pour décrire, produire, consommer et visualiser des services web RESTful.
 
-- Vérifier la valeur de l’Origin en CORS
+### Monitoring et Journalisation
 
-S’assurer que la requête CORS provient d'une source de confiance en validant l'en-tête Origin. protège les ressources contre les accès non autorisés.
+Nous allons mettre en place un système de surveillance continue pour détecter les activités suspectes et réagir rapidement en cas d'incident. Des journaux d'audit détaillés seront maintenus pour enregistrer toutes les actions effectuées sur la plateforme, facilitant ainsi la détection des comportements anormaux et la réponse aux menaces potentielles.
 
-### Gestion des Cookies et des En-têtes HTTP
+### Sécuriser les routes via des ACL (Access Control List)
 
-- Configurer l’en-tête Content-Type
+Contrôle des permissions et des rôles utilisateurs à chaque demande d’accès aux ressources protégées (fichiers, fonctionnalités admin/modérateur)
 
-Pour garantir que les navigateurs interprètent correctement les données, il faut spécifier l'en-tête Content-Type dans toutes les réponses de l'API.
+### Gestion des Rôles avec RBAC (Role-Based Access Control)
 
-- Définir la politique de l’en-tête Referrer
+Système qui assigne des permissions aux utilisateurs en fonction des rôles qu'ils occupent. Définir les rôles est fondamental pour respecter le principe du moindre privilège, qui vise à limiter les privilèges des utilisateurs uniquement à ce dont ils ont besoin pour accomplir leurs tâches. Ici nous avons défini rôles:
 
-La configuration de l'en-tête Referrer-Policy permet de contrôler les informations de référent envoyées par le navigateur. Cela protège les données sensibles lors de la navigation entre différents sites.
+- Super-administrateur
 
-- Ne pas stocker d’informations sensibles dans les cookies
+- Administrateur
 
-En limitant les informations sensibles stockées dans les cookies. Et en utilisant les attributs HttpOnly et Secure pour empêcher l'accès par des scripts et assurer que les cookies ne sont envoyés que sur des connexions sécurisées.
+- Modérateur
 
-- Stratégie stricte d’envoi des cookies en cross-site
+- Membre
 
-En Configurant l’attributs SameSite pour contrôler l'envoi des cookies en cross-site. Cela protège contre les attaques CSRF (Cross-Site Request Forgery).
+**Sécurité** : Des mesures robustes seront implémentées pour protéger les données contre les accès non autorisés et les pertes.  
+**Politique de Confidentialité** : Une politique claire et accessible décrira la gestion des données personnelles et les droits des utilisateurs.
 
-### Bonnes Pratiques de Développement
+___
 
-- Choisir une API selon sa méthode HTTP
+## Conclusion 
 
-L’utilisation des méthodes HTTP appropriées pour les opérations (GET, POST, PUT, DELETE). Chaque méthode a des utilisations spécifiques et leur utilisation correcte renforce la sécurité et la clarté de l'API.
 
-- Éviter l'usage de eval()
-
-L'utilisation de la fonction eval() est dangereuse, car elle peut exécuter du code arbitraire. Il est recommandé de ne jamais l’utiliser pour éviter des failles de sécurité.
-
-- Éviter les évaluations de code dynamiques
-
-En évitant d’inclure l'utilisation de méthodes ou de fonctions qui interprètent des chaînes de caractères comme du code.
-
-### Gestion des Ressources et des Composants
-
-- Contrôler l'intégrité des contenus internes et tiers
-
-Vérifier l'intégrité des fichiers internes avec  des mécanismes comme les hachages. Cela garantit que les fichiers n'ont pas été altérés.
-
-- Restreindre les contenus aux sources fiables
-
-S’assurer que les bibliothèques et les fichiers proviennent de sources fiables pour minimiser les risques d’inclure des composants malveillants.
-
-- Limiter les composants logiciels tiers
-
-En réduisant l'utilisation des composants logiciels tiers au minimum nécessaire. Nous limiterons les composants pour réduire la surface d'attaque.
-
-- Maintenir à jour les composants logiciels tiers
-
-Des composants obsolètes peuvent contenir des failles de sécurité exploitées par des attaquants. Les maintenir à jour leur réduirait leurs exploitations
-
-- Ne pas modifier le cœur des composants tiers
-
-Garantir la maintenabilité et la sécurité des composants tiers en ne les modifiant pas, les modifications pouvant introduire des vulnérabilités et compliquer les futur mise a jour.
-
-- Cloisonner les services web par domaines
-
-Limiter la portée des attaques potentielles en utilisant différents sous-domaines pour séparer les différents services web.
+En appliquant ces mesures de sécurité, nous réduisons les failles de sécurité qui peuvent survenir et nous réduisons le risque d'indisponibilité des services. Cette stratégie sera réévaluée régulièrement pour répondre aux Vulnérabilités exposées connues (CVE) et aux changements technologiques. 
