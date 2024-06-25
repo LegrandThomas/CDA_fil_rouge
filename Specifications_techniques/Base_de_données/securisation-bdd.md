@@ -8,19 +8,19 @@ Les principales menaces identifiées pour notre application incluent :
 - **Attaque par Forgery de Requêtes Inter-Sites (CSRF)** : Les attaquants pourraient manipuler les actions des utilisateurs authentifiés sur la plateforme, compromettant ainsi l'intégrité des données et les transactions.
 - **Injection SQL (SQLi)** : Les failles dans la gestion des bases de données pourraient permettre aux attaquants d'accéder, de modifier ou de supprimer des données sensibles, constituant ainsi une menace sérieuse pour la sécurité et l'intégrité des données des utilisateurs.
 
-___
+---
 
 ## Stratégie de sécurisation de la base de données
 
 ## Introduction
 
-Nous avons choisi de développer la base de données avec PostgreSQL. Les données représentent le coeur de toute application. Il faut garantir l'intégrité, la sécurité et l'accessibilité de celles-ci. 
+Nous avons choisi de développer la base de données avec PostgreSQL. Les données représentent le coeur de toute application. Il faut garantir l'intégrité, la sécurité et l'accessibilité de celles-ci.
 
 - **Contrôle d'accès physique** : Le serveur hébergeant PostgreSQL est dans un environnement sécurisé et accessible uniquement par le personnel autorisé.
 - **Système d'exploitation** : Utilisation des comptes utilisateur distincts pour exécuter PostgreSQL. Les permissions de ces comptes seront limités pour minimiser les risques.
 - **Pare-feu** : Un pare-feu est utilisé pour restreindre l'accès au port PostgreSQL (par défaut, 5432) uniquement aux adresses IP autorisées. Nous allons mettre en place une “liste blanche”, qui contiendras seulement les IP autorisées à acceder au port 5432.
 - **Mises à jour régulières:** Nous Appliquerons régulièrement les mises à jour de sécurité de PostgreSQL pour corriger les vulnérabilités connues.
-- **Configuration sécurisée:**  PostgreSQL sera configuré pour désactiver les fonctionnalités non utilisées et renforcer les protections par défaut. Par exemple, modifier le fichier **`postgresql.conf`** pour ajuster les paramètres de sécurité (configuration SSL) ou utilisez **`pg_hba.conf`** pour gérer les méthodes d'authentification et restreindre l'accès.
+- **Configuration sécurisée:** PostgreSQL sera configuré pour désactiver les fonctionnalités non utilisées et renforcer les protections par défaut. Par exemple, modifier le fichier **`postgresql.conf`** pour ajuster les paramètres de sécurité (configuration SSL) ou utilisez **`pg_hba.conf`** pour gérer les méthodes d'authentification et restreindre l'accès.
 
 ### Politique des Mots de Passe <a id="politique-des-mots-de-passe"></a>
 
@@ -74,7 +74,7 @@ Employez un ORM pour accéder à la base de données, ce qui aide à prévenir l
 Nous mettrons en place une stratégie de sauvegarde robuste pour protéger les données de l'application contre les incidents tels que les pannes, les erreurs ou les attaques. Des sauvegardes régulières des données seront effectuées pour garantir la disponibilité et l'intégrité des informations des utilisateurs en cas de problème. Automatisation régulière des sauvegardes de la bdd grâce à pg_cron afin de lutter contre les ransomwares
 **Sécurité des applications:**
 
-- **Validation des entrées:** Toutes les entrées utilisateurs  seront rigoureusement validées pour empêcher les injections de code malveillant et autres attaques.
+- **Validation des entrées:** Toutes les entrées utilisateurs seront rigoureusement validées pour empêcher les injections de code malveillant et autres attaques.
 
 - **Tests de sécurité:** Des tests de sécurité réguliers de l'application serviront à identifier et corriger les vulnérabilités.
 - **Mise à jour des bibliothèques:** Nous allons mettre régulièrement à jour les bibliothèques tierces utilisées par l'application pour corriger les vulnérabilités connues.
@@ -84,10 +84,10 @@ Nous mettrons en place une stratégie de sauvegarde robuste pour protéger les d
 - **Contrôle du partage:** Des contrôles d'accès seront mis en place au niveau applicatif pour permettre aux utilisateurs de partager des notes avec des permissions spécifiques (lecture, écriture). Ceci rajoutera une couche supplémentaire à qui peut accéder certaines données dans la base de donnée.
 - **Journal du partage de note:** Une journalisation du partage de note sera mis en place afin de savoir quelles notes a été envoyé à quel utilisateur ainsi qu ela réponse de ce partage, s’il a été accepté, ou refusé. Cette journalisation nous permettra aussi d’être informé en cas d’activité anormales et y remédier.
 
+---
 
-___
+## Conclusion
 
+En appliquant ces mesures de sécurité, nous réduisons la fuite de données, l'accés non-autorisé à ces ressources. Cette stratégie sera réévaluée régulièrement pour répondre aux Vulnérabilités exposées connues (CVE) et aux changements technologiques.. La sécurité de la base de données s'adaptera aux changements et aux ressources accumulés sur le site.
 
-## Conclusion 
-
-En appliquant ces mesures de sécurité, nous réduisons la fuite de données, l'accés non-autorisé à ces ressources. Cette stratégie sera réévaluée régulièrement pour répondre aux Vulnérabilités exposées connues (CVE) et aux changements technologiques.. La sécurité de la base de données s'adaptera aux changements et aux ressources accumulés sur le site. 
+[🔙 Retour à la Table des matières](../README.md)

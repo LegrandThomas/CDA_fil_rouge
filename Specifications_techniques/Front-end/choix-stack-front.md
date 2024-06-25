@@ -3,29 +3,26 @@
 # Comparatif frameworks Front-end
 
 Dans le processus de conception et de développement de notre application, le choix des technologies et des outils est une étape cruciale qui impactera directement la qualité, la performance et la maintenabilité de notre produit final.  
-Pour prendre des décisions éclairées et rationaliser nos choix technologiques, nous avons établi le tableau suivant qui évalue différents aspects clés des différents frameworks potentielles.  
+Pour prendre des décisions éclairées et rationaliser nos choix technologiques, nous avons établi le tableau suivant qui évalue différents aspects clés des différents frameworks potentielles.
 
-
-
-| |Catégorie |🥉 Vue.js |  Angular | 🥈React |🥇 Next.js |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Scalabilité | ⭐️⭐️⭐️ | ⭐️⭐️ | ⭐️⭐️  | ⭐️⭐️⭐️⭐️ |
-| 2 | Payant | Gratuit | Gratuit | Gratuit | Gratuit |
-| 3 | Rapidité | ⭐️⭐️ | ⭐️ | ⭐️⭐️⭐️ | ⭐️⭐️ |
-| 4 | Popularité |⭐️⭐️ | ⭐️ | ⭐️⭐️⭐️ | ⭐️⭐️⭐️ |
-| 5 | Maturité | ⭐️ | ⭐️⭐️⭐️ | ⭐️⭐️⭐️ | ⭐️⭐️⭐️⭐️  |
-| 6 | Licence Open Source | MIT | MIT | MIT | MIT |
-| 7 | Communauté GitHub | ⭐️⭐️ | ⭐️⭐️| ⭐️⭐️⭐️  | ⭐️⭐️⭐️ |
-| 8 | Contributeurs | Peu | Nombreux | Nombreux | Très nombreux |
-| 9 | Documentation | ⭐️⭐️⭐️ | ⭐️⭐️ | ⭐️⭐️⭐️ | ⭐️⭐️⭐️ |
-| 10 | Dépendances/librairies | ⭐️⭐️⭐️ | ⭐️⭐️⭐️ | ⭐️⭐️⭐️⭐️ | ⭐️⭐️⭐️ |
-| <strong>TOTAL</strong> | |<strong>16</strong> | <strong>15</strong> | <strong>20</strong> | <strong>21</strong> |
+|                        | Catégorie              | 🥉 Vue.js           | Angular             | 🥈React             | 🥇 Next.js          |
+| ---------------------- | ---------------------- | ------------------- | ------------------- | ------------------- | ------------------- |
+| 1                      | Scalabilité            | ⭐️⭐️⭐️           | ⭐️⭐️              | ⭐️⭐️              | ⭐️⭐️⭐️⭐️        |
+| 2                      | Payant                 | Gratuit             | Gratuit             | Gratuit             | Gratuit             |
+| 3                      | Rapidité               | ⭐️⭐️              | ⭐️                 | ⭐️⭐️⭐️           | ⭐️⭐️              |
+| 4                      | Popularité             | ⭐️⭐️              | ⭐️                 | ⭐️⭐️⭐️           | ⭐️⭐️⭐️           |
+| 5                      | Maturité               | ⭐️                 | ⭐️⭐️⭐️           | ⭐️⭐️⭐️           | ⭐️⭐️⭐️⭐️        |
+| 6                      | Licence Open Source    | MIT                 | MIT                 | MIT                 | MIT                 |
+| 7                      | Communauté GitHub      | ⭐️⭐️              | ⭐️⭐️              | ⭐️⭐️⭐️           | ⭐️⭐️⭐️           |
+| 8                      | Contributeurs          | Peu                 | Nombreux            | Nombreux            | Très nombreux       |
+| 9                      | Documentation          | ⭐️⭐️⭐️           | ⭐️⭐️              | ⭐️⭐️⭐️           | ⭐️⭐️⭐️           |
+| 10                     | Dépendances/librairies | ⭐️⭐️⭐️           | ⭐️⭐️⭐️           | ⭐️⭐️⭐️⭐️        | ⭐️⭐️⭐️           |
+| <strong>TOTAL</strong> |                        | <strong>16</strong> | <strong>15</strong> | <strong>20</strong> | <strong>21</strong> |
 
 <details>
 <summary>Comparatif détaillé Frontend Vue.js Vs Angular Vs React Vs Next</summary>
 
 ### **Scalabilité**
-
 
 - **Vue.js** : Adaptable à la fois pour les petits et les grands projets grâce à sa simplicité et modularité. L'utilisation de TypeScript ajoute une couche de robustesse en termes de maintenance et évolutivité du code.
 - **Angular** : Conçu pour des applications d'entreprise de grande envergure avec une architecture robuste, Angular utilise TypeScript nativement, ce qui renforce sa capacité à gérer des applications complexes.
@@ -33,7 +30,6 @@ Pour prendre des décisions éclairées et rationaliser nos choix technologiques
 - **Next.js** : Idéal pour les projets de toutes tailles, avec une excellente prise en charge du SSR et du SSG. L'intégration de TypeScript rend le code plus prévisible et sûr, renforçant la scalabilité.
 
 ### **Coût**
-
 
 - **Vue.js**, **Angular**, **React** : Tous open-source et gratuits. Les coûts de développement peuvent varier en fonction de la disponibilité des développeurs et de leur expertise avec chaque framework, y compris leur maîtrise de TypeScript.
 - **Next.js** : Également open-source et gratuit. Les coûts principaux sont liés au développement et à l'infrastructure, notamment pour le SSR, mais ces coûts peuvent être optimisés grâce à une bonne planification et l'utilisation de plateformes d'hébergement adaptées. L'utilisation de TypeScript peut augmenter les coûts initiaux mais réduit les erreurs potentielles.
@@ -111,3 +107,5 @@ Pour prendre des décisions éclairées et rationaliser nos choix technologiques
 >
 > - L'utilisation de TypeScript avec Next.js enrichit notre projet en améliorant la sécurité du type et en réduisant les erreurs potentielles lors du développement, ce qui est crucial pour notre application nécessitant une interaction utilisateur dynamique et des fonctionnalités avancées comme les flux RSS et les commentaires.
 > - La combinaison de Next.js et TypeScript offre une base solide pour une maintenance aisée et une évolutivité efficace, tout en profitant d'une forte communauté, d'une documentation complète, et d'une maintenance active pour rester à la pointe de la technologie.
+
+[🔙 Retour à la Table des matières](../README.md)
