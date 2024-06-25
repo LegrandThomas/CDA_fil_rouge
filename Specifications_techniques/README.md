@@ -1,6 +1,6 @@
 # Spécifications techniques
 
-- Découpage de l'application en couche N-tiers.
+- [Découpage de l'application en couche N-tiers](./architecture_N-tiers.md).
 - Questions globales
   
 ## Back-end
