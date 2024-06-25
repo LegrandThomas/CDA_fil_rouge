@@ -2,11 +2,12 @@
 
 - [Découpage de l'application en couche N-tiers](./architecture_N-tiers.md).
 - [Questions globales](./questions-globales.md)
-  
+
 ## Back-end
 
 ### Base de donnée
-- [RGPD](./rgpd.md)
+
+- [RGPD](./RGPD.md)
 - [Stratégie de sécurisation BDD](./securisation-bdd.md)
 - [Choix de base de données](choix-bdd.md)
 - [MCD](./mcd.md)
@@ -15,13 +16,13 @@
 - [Dictionnaire de données](./dictionnaire-donnees.md)
 
 ### API
+
 - [Stratégie de sécurisation API](./securisation-api.md)
 - [Choix stack API](choix-stack-api.md)
 - [Diagramme de cas d'utilisation](./cas-utilisation.md)
 - [Diagramme d'activité](./diagramme-activite.md)
 - [Diagramme de séquence](./diagramme-sequence.md)
 - [Diagramme de classe](./diagramme-classe.md)
-
 
 ## Clients
 
@@ -39,8 +40,4 @@
 - [Wireframes](./wireframes-mobile.md)
 - [Mockups](./mockups-mobile.md)
 
-
 [🔙 Retour à la Table des matières](../README.md)
-
-
-
