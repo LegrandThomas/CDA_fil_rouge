@@ -1,36 +1,79 @@
-# Dictionnaire des données
+# Dictionnaire de données
+
+### Introduction
+
+Un dictionnaire de donnée se définit comme un référentiel de métadonnées qui renseigne sur le contexte d’une base de données et qui fournit les informations nécessaires pour pouvoir l’interpréter.  
+Cette documentation facilite la gestion des bases de données et permet aux administrateurs et utilisateurs de comprendre facilement la structure de leurs bases de données.
+
+| Entité                 | Attribut                   | Type de Données |Longueur| Contraintes                                 | Description                                        | Exemple                                |
+|------------------------|----------------------------|-----------------|--------|---------------------------------------------|----------------------------------------------------|----------------------------------------|
+| tags                   | tag_id                     | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique du tag                           | "550e8400-e29b-41d4-a716-446655440000" |
+|                        | tag_title                  | VARCHAR         |100     | NOT NULL, UNIQUE                            | Titre du tag                                       | "Technology"                           |
+|                        | created_at                 | DATETIME       |        | NOT NULL                                    | Date de création                                   | "2024-01-01 12:00:00"                  |
+|                        | updated_at                 | DATETIME       |        | NOT NULL                                    | Date de mise à jour                                | "2024-01-01 12:00:00"                  |
+| roles                  | role_id                    | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique du rôle                          | "550e8400-e29b-41d4-a716-446655440001" |
+|                        | role_name                  | VARCHAR         |100     | NOT NULL, UNIQUE                            | Nom du rôle                                        | "Administrateur"                       |
+| ressources_types       | ressource_type_id          | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique du type de ressource             | "550e8400-e29b-41d4-a716-446655440002" |
+|                        | type_name                  | VARCHAR         |50      | NOT NULL, UNIQUE                            | Nom du type de ressource                           | "Article"                              |
+|                        | created_at                 | DATETIME       |        | NOT NULL                                    | Date de création                                   | "2024-01-01 12:00:00"                  |
+|                        | updated_at                 | DATETIME       |        | NOT NULL                                    | Date de mise à jour                                | "2024-01-01 12:00:00"                  |
+| ressources_status      | ressource_status_id        | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique du statut de ressource           | "550e8400-e29b-41d4-a716-446655440003" |
+|                        | name                       | VARCHAR         |100     | NOT NULL, UNIQUE                            | Nom du statut                                      | "Published"                            |
+|                        | created_at                 | DATETIME       |        | NOT NULL                                    | Date de création                                   | "2024-01-01 12:00:00"                  |
+|                        | updated_at                 | DATETIME       |        | NOT NULL                                    | Date de mise à jour                                | "2024-01-01 12:00:00"                  |
+| users                  | user_id                    | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique de l'utilisateur                 | "550e8400-e29b-41d4-a716-446655440004" |
+|                        | username                   | VARCHAR         |100     | NOT NULL, UNIQUE                            | Nom d'utilisateur                                  | "johndoe"                              |
+|                        | email                      | VARCHAR         |100     | NOT NULL, UNIQUE                            | Adresse e-mail                                     | "johndoe@example.com"                  |
+|                        | password                   | VARCHAR         |255     | NOT NULL                                    | Mot de passe                                       | "hashedpassword"                       |
+|                        | is_active                  | BOOLEAN         |        | NOT NULL                                    | Indicateur d'activité                              | true                                   |
+|                        | created_at                 | DATETIME       |        | NOT NULL                                    | Date de création                                   | "2024-01-01 12:00:00"                  |
+|                        | updated_at                 | DATETIME       |        | NOT NULL                                    | Date de mise à jour                                | "2024-01-01 12:00:00"                  |
+|                        | role_id                    | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant du rôle associé                        | "550e8400-e29b-41d4-a716-446655440001" |
+| ressources             | ressource_id               | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique de la ressource                 | "550e8400-e29b-41d4-a716-446655440005" |
+|                        | title                      | VARCHAR         |50      | NOT NULL, UNIQUE                            | Titre de la ressource                              | "How to Learn SQL"                     |
+|                        | content                    | TEXT            |        |                                             | Contenu de la ressource                            | "Content of the article"               |
+|                        | summary                    | VARCHAR         |255     |                                             | Résumé de la ressource                             | "A brief summary"                      |
+|                        | is_reported                | BOOLEAN         |        | NOT NULL                                    | Indicateur de signalement                          | false                                  |
+|                        | created_at                 | DATETIME       |        | NOT NULL                                    | Date de création                                   | "2024-01-01 12:00:00"                  |
+|                        | updated_at                 | DATETIME       |        | NOT NULL                                    | Date de mise à jour                                | "2024-01-01 12:00:00"                  |
+|                        | user_id                    | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de l'utilisateur associé               | "550e8400-e29b-41d4-a716-446655440004" |
+|                        | ressource_type_id          | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant du type de ressource associé           | "550e8400-e29b-41d4-a716-446655440002" |
+|                        | ressource_status_id        | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant du statut de la ressource associée     | "550e8400-e29b-41d4-a716-446655440003" |
+|                        | user_id_1                  | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant supplémentaire de l'utilisateur associé| "550e8400-e29b-41d4-a716-446655440004" |
+| sharing_sessions       | sharing_session_id         | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique de la session de partage        | "550e8400-e29b-41d4-a716-446655440006" |
+|                        | title                      | VARCHAR         |255     | NOT NULL, UNIQUE                            | Titre de la session de partage                     | "Learning SQL Basics"                  |
+|                        | description                | TEXT            |        |                                             | Description de la session de partage               | "A session on learning SQL basics"     |
+|                        | event_start_datetime       | DATETIME       |        | NOT NULL                                    | Date et heure de début de l'événement              | "2024-02-01 10:00:00"                  |
+|                        | event_end_datetime         | DATETIME       |        | NOT NULL                                    | Date et heure de fin de l'événement                | "2024-02-01 12:00:00"                  |
+|                        | created_at                 | DATETIME       |        | NOT NULL                                    | Date de création                                   | "2024-01-01 12:00:00"                  |
+|                        | updated_at                 | DATETIME       |        | NOT NULL                                    | Date de mise à jour                                | "2024-01-01 12:00:00"                  |
+|                        | user_id                    | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de l'utilisateur organisateur          | "550e8400-e29b-41d4-a716-446655440004" |
+| comments               | comment_id                 | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique du commentaire                  | "550e8400-e29b-41d4-a716-446655440007" |
+|                        | content                    | VARCHAR         |255     |                                             | Contenu du commentaire                             | "Great article!"                       |
+|                        | is_reported                | BOOLEAN         |        |                                             | Indicateur de signalement                          | false                                  |
+|                        | created_at                 | DATETIME       |        | NOT NULL                                    | Date de création                                   | "2024-01-01 12:00:00"                  |
+|                        | updated_at                 | DATETIME       |        | NOT NULL                                    | Date de mise à jour                                | "2024-01-01 12:00:00"                  |
+|                        | comment_id_1               | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant du commentaire parent                  | "550e8400-e29b-41d4-a716-446655440007" |
+|                        | user_id                    | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de l'utilisateur ayant fait le commentaire | "550e8400-e29b-41d4-a716-446655440004" |
+|                        | ressource_id               | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de la ressource associée               | "550e8400-e29b-41d4-a716-446655440005" |
+| ressources_status_history | ressource_status_history_id | VARCHAR    |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique de l'historique des statuts     | "550e8400-e29b-41d4-a716-446655440008" |
+|                        | status_changed_at          | DATETIME       |        | NOT NULL                                    | Date de changement de statut                       | "2024-03-01 12:00:00"                  |
+|                        | preview_state              | VARCHAR         |50      |                                             | État précédent                                     | "Draft"                                |
+|                        | new_state                  | VARCHAR         |50      |                                             | Nouvel état                                        | "Published"                            |
+|                        | created_at                 | DATETIME       |        | NOT NULL                                    | Date de création                                   | "2024-01-01 12:00:00"                  |
+|                        | updated_at                 | DATETIME       |        | NOT NULL                                    | Date de mise à jour                                | "2024-01-01 12:00:00"                  |
+|                        | ressource_id               | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de la ressource associée               | "550e8400-e29b-41d4-a716-446655440005" |
+| have                   | tag_id                     | VARCHAR         |36      | NOT NULL, UNIQUE, DEFAULT uuid_generate_v4(), PK | Identifiant unique du tag                          | "550e8400-e29b-41d4-a716-446655440000" |
+|                        | ressource_id               | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de la ressource associée               | "550e8400-e29b-41d4-a716-446655440005" |
+|                        | PRIMARY KEY                |                 |        | PRIMARY KEY(tag_id, ressource_id)            | Clé primaire composée                              |                                        |
+| reference              | ressource_id               | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de la ressource associée               | "550e8400-e29b-41d4-a716-446655440005" |
+|                        | sharing_session_id         | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de la session de partage associée      | "550e8400-e29b-41d4-a716-446655440006" |
+|                        | PRIMARY KEY                |                 |        | PRIMARY KEY(ressource_id, sharing_session_id)| Clé primaire composée                              |                                        |
+| refer                  | tag_id                     | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant unique du tag                          | "550e8400-e29b-41d4-a716-446655440000" |
+|                        | sharing_session_id         | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de la session de partage associée      | "550e8400-e29b-41d4-a716-446655440006" |
+|                        | PRIMARY KEY                |                 |        | PRIMARY KEY(tag_id, sharing_session_id)      | Clé primaire composée                              |                                        |
+| follow                 | user_id                    | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de l'utilisateur                       | "550e8400-e29b-41d4-a716-446655440004" |
+|                        | user_id_1                  | VARCHAR         |36      | NOT NULL, FK                                 | Identifiant de l'utilisateur suivi                 | "550e8400-e29b-41d4-a716-446655440004" |
+|                        | PRIMARY KEY                |                 |        | PRIMARY KEY(user_id, user_id_1)              | Clé primaire composée                              |                                        |
 
 
-| Entity          | Attribute         | Type     | Description                                                     | Example                               |
-|-----------------|-------------------|----------|-----------------------------------------------------------------|---------------------------------------|
-| Users           | ID                | UUID     | Unique identifier for the user                                   | 123e4567-e89b-12d3-a456-426614174000  |
-|                 | Pseudo            | String   | User's display name                                             | "johndoe123"                          |
-|                 | Email             | String   | User's email address                                            | "johndoe@example.com"                 |
-|                 | Password          | String   | User's hashed password                                          | "hashedPassword123"                   |
-|                 | CreatedAt         | DateTime | Date and time when the user account was created                  | "2024-06-25 14:30:00"                 |
-| Notes           | ID                | UUID     | Unique identifier for the note                                   | 123e4567-e89b-12d3-a456-426614174001  |
-|                 | Content           | Text     | Text content of the note                                         | "Meeting notes..."                    |
-|                 | CreatedAt         | DateTime | Date and time when the note was created                          | "2024-06-25 15:00:00"                 |
-|                 | ModifiedAt        | DateTime | Date and time when the note was last modified                    | "2024-06-25 15:30:00"                 |
-|                 | ArchivedAt        | DateTime | Date and time when the note was archived                         | "2024-06-26 10:00:00"                 |
-|                 | OwnerID           | UUID     | ID of the user who owns the note                                 | 123e4567-e89b-12d3-a456-426614174000  |
-| Notebooks       | ID                | UUID     | Unique identifier for the notebook                               | 123e4567-e89b-12d3-a456-426614174002  |
-|                 | Title             | String   | Title of the notebook                                            | "Work Projects"                       |
-|                 | CreatedAt         | DateTime | Date and time when the notebook was created                      | "2024-06-25 16:00:00"                 |
-|                 | OwnerID           | UUID     | ID of the user who owns the notebook                             | 123e4567-e89b-12d3-a456-426614174000  |
-| Friends-Users   | ID                | UUID     | Unique identifier for the friendship relation between users       | 123e4567-e89b-12d3-a456-426614174003  |
-|                 | User1ID           | UUID     | ID of the user who initiates the friend request                  | 123e4567-e89b-12d3-a456-426614174000  |
-|                 | User2ID           | UUID     | ID of the user who receives the friend request                   | 123e4567-e89b-12d3-a456-426614174001  |
-|                 | idStatus           | String   | Status of the friend request (pending, accepted, declined)       | "accepted"                            |
-| Administrators  | ID                | UUID     | Unique identifier for the administrator                          | 123e4567-e89b-12d3-a456-426614174004  |
-|                 | Name              | String   | Name of the administrator                                        | "Admin Smith"                         |
-|                 | Email             | String   | Email address of the administrator                               | "admin@example.com"                   |
-|                 | Password          | String   | Administrator's hashed password                                  | "hashedPassword123"                   |
-|                 | CreatedAt         | DateTime | Date and time when the administrator account was created         | "2024-06-25 12:00:00"                 |
-| Status          | Label             | String   | Descriptive label for a status                                   | "pending", "accepted", " declined"    |
-| NoteSharing     | ID                | UUID     | Unique identifier for the note sharing relationship              | 123e4567-e89b-12d3-a456-426614174005  |
-|                 | NoteID            | UUID     | ID of the note being shared                                      | 123e4567-e89b-12d3-a456-426614174001  |
-|                 | SharedByUserID    | UUID     | ID of the user who shares the note                               | 123e4567-e89b-12d3-a456-426614174000  |
-|                 | SharedWithUserID  | UUID     | ID of the user with whom the note is shared                      | 123e4567-e89b-12d3-a456-426614174001  |
-|                 | writing-right     | bool   | Permission level for the shared note (read-only or read-write)    | "true" or "false"                     |
-|                 | idStatus           | String   | Status of the friend request (pending, accepted, declined)       | "accepted"                            |
