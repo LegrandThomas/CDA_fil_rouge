@@ -1,31 +1,61 @@
-# RBAC - Role-Based Access Control
+## RBAC (Role-Based Access Control)
 
-Le Contrôle d'Accès Basé sur les Rôles (RBAC) est un modèle de gestion des autorisations qui attribue des privilèges aux utilisateurs en fonction de leur rôle au sein d'une organisation.  
-Dans ce modèle, chaque utilisateur se voit assigner un ou plusieurs rôles qui déterminent les actions auxquelles il peut accéder et les opérations qu'il peut effectuer dans le système.
+Ce tableau aligne les permissions et les actions possibles pour chaque rôle selon les exigences et les scénarios d'utilisation détaillés dans nos User Stories. Il est conçu pour faciliter la compréhension des responsabilités et des capacités de chaque rôle au sein de la plateforme, assurant ainsi que les objectifs de gestion des utilisateurs, de modération des contenus et d'engagement des utilisateurs sont atteints efficacement.
 
-En attribuant des rôles spécifiques aux utilisateurs, tels que administrateur, utilisateur régulier, ou invité,  
-le RBAC permet de définir clairement qui peut effectuer quelles actions sur les notes, les carnets et autres fonctionnalités de l'application.  
-Cette approche simplifie la gestion des autorisations en réduisant la complexité des configurations individuelles d'autorisations pour chaque utilisateur.
+### Vue d'ensemble :
 
-Nous avons besoin d'un RBAC dans notre application pour plusieurs raisons essentielles:
-- Cela garantit une sécurité renforcée en limitant l'accès aux fonctionnalités sensibles uniquement aux utilisateurs autorisés.
-- cela facilite la gestion des utilisateurs à grande échelle en permettant une administration centralisée des permissions basées sur les rôles plutôt que sur des autorisations individuelles.
-- le RBAC favorise la conformité réglementaire en assurant un contrôle précis et auditable des accès aux données et aux fonctionnalités critiques de l'application.
+| Autorisations / Rôle                                          | Visiteur | Utilisateur | Modérateur | Administrateur | Super Administrateur |
+| ------------------------------------------------------------- | -------- | ----------- | ---------- | -------------- | -------------------- |
+| Gestion de l'authentification et accès à contenu personnalisé | ✅       | ✅          | ✅         | ✅             | ❌                   |
+| Recevoir des notifications en cas de suppression de contenu   | ❌       | ✅          | ✅         | ✅             | ❌                   |
+| Publication d'articles et de commentaires                     | ❌       | ✅          | ✅         | ✅             | ❌                   |
+| Accès à une interface de modération                           | ❌       | ❌          | ✅         | ✅             | ❌                   |
+| Suppression de contenus non conformes                         | ❌       | ❌          | ✅         | ✅             | ❌                   |
+| Accorder ou retirer des permissions de publication            | ❌       | ❌          | ✅         | ✅             | ❌                   |
+| Accès à un rapport d'activité de modération                   | ❌       | ❌          | ✅         | ✅             | ❌                   |
+| Créer des comptes modérateurs                                 | ❌       | ❌          | ❌         | ✅             | ❌                   |
+| Modifier des comptes modérateurs                              | ❌       | ❌          | ❌         | ✅             | ❌                   |
+| Supprimer des comptes modérateurs                             | ❌       | ❌          | ❌         | ✅             | ❌                   |
+| Créer des comptes utilisateurs                                | ❌       | ❌          | ❌         | ✅             | ❌                   |
+| Modifier des comptes utilisateurs                             | ❌       | ❌          | ❌         | ✅             | ❌                   |
+| Supprimer des comptes utilisateurs                            | ❌       | ❌          | ❌         | ✅             | ❌                   |
+| Attribuer/modifier des rôles                                  | ❌       | ❌          | ❌         | ✅             | ❌                   |
+| Créer des administrateurs                                     | ❌       | ❌          | ❌         | ❌             | ✅                   |
+| Modifier des administrateurs                                  | ❌       | ❌          | ❌         | ❌             | ✅                   |
+| Supprimer des administrateurs                                 | ❌       | ❌          | ❌         | ❌             | ✅                   |
 
+### Vue détaillée :
 
+<details>
+<summary>Cliquez pour voir les autorisations détaillées de chaque rôle (Cliquez pour développer)</summary>
 
-| Actions                                      | Registered User | Visitor | Administrator | 
-|:--------------------------------------------:|:---------------:|:-------:|:-------:|
-| Sign In                                      | ✅              | ❌      ||
-| Sign Up                                      | ✅              | ✅      ||
-| Manage Account (password reset, etc.)        | ✅              | ✅      ||
-| View Post-it                                 | ✅              | ❌      ||
-| Create Post-it                               | ✅              | ❌      ||
-| Edit Post-it                                 | ✅              | ❌      ||
-| Archive Post-it                              | ✅              | ❌      ||
-| Filter/Sort Post-it                          | ✅              | ❌      ||
-| Create Notebook                              | ✅              | ❌      ||
-| Edit Notebook                                | ✅              | ❌      ||
-| Archive Notebook                             | ✅              | ❌      ||
-| Restore Archived Post-it/Notebook            | ✅              | ❌      ||
+| Autorisations / Rôle                                          | Visiteur                | Utilisateur                                                 | Modérateur                                                  | Administrateur                                                     | Super Administrateur                                   |
+| ------------------------------------------------------------- | ----------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------ |
+| Gestion de l'authentification et accès à contenu personnalisé | Créer son propre compte | Créer, modifier, supprimer son propre compte                | Modifier son propre compte                                  | Créer, modifier, supprimer des comptes utilisateurs et modérateurs | Créer, modifier, supprimer des comptes administrateurs |
+| Recevoir des notifications en cas de suppression de contenu   |                         | Recevoir des notifications en cas de suppression de contenu | Recevoir des notifications en cas de suppression de contenu | Recevoir des notifications en cas de suppression de contenu        |                                                        |
+| Publication d'articles et de commentaires                     |                         | Publier des articles et des commentaires                    | Publier des articles et des commentaires                    | Publier des articles et des commentaires                           |                                                        |
+| Accès à une interface de modération                           |                         |                                                             | Accéder à l'interface de modération                         |                                                                    |                                                        |
+| Suppression de contenus non conformes                         |                         |                                                             | Supprimer des contenus non conformes                        | Supprimer des contenus non conformes                               |                                                        |
+| Accorder ou retirer des permissions de publication            |                         |                                                             | Accorder ou retirer des permissions de publication          | Accorder ou retirer des permissions de publication                 |                                                        |
+| Accès à un rapport d'activité de modération                   |                         |                                                             | Accéder à un rapport d'activité de modération               | Accéder à un rapport d'activité de modération                      |                                                        |
+| Créer un compte modérateur                                    |                         |                                                             |                                                             | Créer des comptes modérateurs                                      |                                                        |
+| Modifier un compte modérateur                                 |                         |                                                             |                                                             | Modifier des comptes modérateurs                                   |                                                        |
+| Supprimer un compte modérateur                                |                         |                                                             |                                                             | Supprimer des comptes modérateurs                                  |                                                        |
+| Créer un compte utilisateur                                   |                         |                                                             |                                                             | Créer des comptes utilisateurs                                     |                                                        |
+| Modifier son propre compte utilisateur                        |                         | Modifier son propre compte utilisateur                      |                                                             | Modifier des comptes utilisateurs                                  |                                                        |
+| Modifier un compte utilisateur par un administrateur          |                         |                                                             |                                                             | Modifier des comptes utilisateurs par un administrateur            |                                                        |
+| Supprimer un compte utilisateur                               |                         |                                                             |                                                             | Supprimer des comptes utilisateurs                                 |                                                        |
+| Consulter un contenu                                          | Consulter du contenu    | Consulter du contenu                                        | Consulter du contenu                                        | Consulter du contenu                                               |                                                        |
+| Commenter un contenu                                          |                         | Commenter du contenu                                        | Commenter du contenu                                        | Commenter du contenu                                               |                                                        |
+| Modifier un contenu                                           |                         |                                                             |                                                             | Modifier du contenu                                                |                                                        |
+| Modérer un contenu                                            |                         |                                                             | Modérer du contenu                                          | Modérer du contenu                                                 |                                                        |
+| Signaler un contenu                                           |                         |                                                             |                                                             | Signaler du contenu                                                |                                                        |
+| Bloquer un compte                                             |                         |                                                             |                                                             | Bloquer un compte                                                  |                                                        |
+| Attribuer/modifier des rôles                                  |                         |                                                             |                                                             | Attribuer/modifier des rôles                                       |                                                        |
+| Créer un administrateur                                       |                         |                                                             |                                                             | Créer des comptes administrateurs                                  | Créer, modifier, supprimer des comptes administrateurs |
+| Modifier un administrateur                                    |                         |                                                             |                                                             | Modifier des comptes administrateurs                               | Créer, modifier, supprimer des comptes administrateurs |
+| Supprimer un administrateur                                   |                         |                                                             |                                                             | Supprimer des comptes administrateurs                              | Créer, modifier, supprimer des comptes administrateurs |
 
+</details>
+
+[🔙 Retour à la Table des matières](./README.md)
