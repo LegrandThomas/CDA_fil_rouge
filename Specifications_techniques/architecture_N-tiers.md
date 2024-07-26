@@ -1,6 +1,6 @@
 ## Architecture N-Tiers
 
-<img src="../Assets/Images/n-tier-architecture.png" alt="Image de la plateforme" width=auto>
+<img src="../Assets/Images/n-tier-architecture.png" alt="Image de la plateforme" width="400">
 
 Notre application est structurée selon une **architecture N-tiers**, qui permet une séparation claire des préoccupations, une meilleure gestion de la complexité et une facilité de maintenance. Voici une explication détaillée de chaque couche de notre architecture :
 
