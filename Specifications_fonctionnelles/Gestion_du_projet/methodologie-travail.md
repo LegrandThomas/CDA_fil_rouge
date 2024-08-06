@@ -32,11 +32,21 @@ Notre équipe, constituée de trois personnes, travaille en méthode Agile (Scru
 7. Sprint Retrospective
 8. L'Affinement du Backlog
 
-Le délai moyen d'un **sprint** est de 1 semaine en raison du contexte particulier de ce projet.
+---
 
-Nous n’intègrerons pas l’étape **5-Daily Scrum**, difficile à mettre en place en raison du fait que nous sommes géographiquement dispersés.
+### **Adaptation de Scrum à notre projet**
 
-Concernant les étapes **6-Sprint Review Meeting et 7-Sprint Retrospective,** elles sont souvent réalisées de manière consécutive.
+- Le délai moyen d'un **sprint** est de 1 semaine en raison du contexte particulier de ce projet.
+
+- Nous n’intègrerons pas l’étape **Daily Scrum**, difficile à mettre en place en raison du fait que nous sommes géographiquement dispersés.
+
+- Concernant les étapes **Sprint Review Meeting et Sprint Retrospective,** elles sont souvent réalisées de manière consécutive.
+
+- **Roadmap** : priorité au développement
+
+- Pas de calcul de **vélocité** : Suivi nécessaire pour une meilleure estimation et planification, au moins sur une période de 5 semaines.
+
+---
 
 ### <span style="color: #26B260;">**La Roadmap**</span>
 

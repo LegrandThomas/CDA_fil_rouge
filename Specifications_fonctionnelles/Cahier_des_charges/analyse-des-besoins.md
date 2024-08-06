@@ -1,6 +1,6 @@
 # Analyse du Besoin
 
-## Les Problèmatiques
+## La Problèmatique
 
 Ce tableau permet d'organiser clairement les éléments à prendre en compte lors de la conception de la plateforme, en mettant en évidence les défis spécifiques et les solutions appropriées pour répondre efficacement aux besoins des utilisateurs, particulièrement les développeurs juniors.
 | Problèmes | Descriptions | Solutions |
