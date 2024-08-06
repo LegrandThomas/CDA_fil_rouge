@@ -6,15 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "migration:generate": "npm run typeorm -- migration:generate ./src/migration/InitialMigration -d ./data-source.ts",
+    "migration:run": "npm run typeorm -- migration:run -d ./data-source.ts",
+    "build:migrations": "tsc -p tsconfig.migrations.json",
+    "seed:generate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed:create",
+    "seed:run": "npm run typeorm seed:run -d ./data-source.ts",
+    "seed:revert": "npm run typeorm -- migration:revert -c seed"
   },
   "dependencies": {
     "next": "14.2.5",
+    "node-ts": "^6.1.0",
     "pg": "^8.12.0",
     "react": "^18",
     "react-dom": "^18",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "winston": "^3.13.1"
   },
   "devDependencies": {
     "@types/node": "^20",
