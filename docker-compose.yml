@@ -1,0 +1,44 @@
+version: '3.8'
+
+services: 
+  postgres: 
+    image: postgres:alpine
+    restart: always 
+    environment:
+      POSTGRES_USER: user_beginners
+      POSTGRES_PASSWORD: pass_beginners
+      POSTGRES_DB: db_beginners
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - network-beginners
+
+  api:
+    build: ./back
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: postgres://user_beginners:password@pass_beginners:5432/db_beginners
+    depends_on:
+      - postgres
+    networks:
+      - network-beginners 
+
+  frontend:
+    build: ./front
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - network-beginners 
+
+networks:
+  network-beginners:
+    driver: bridge
+
+volumes:
+  postgres_data:
