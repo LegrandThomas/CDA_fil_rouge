@@ -31,9 +31,14 @@ Cela protégera les données des utilisateurs contre les interceptions malveilla
 
 Mettez en place des contrôles stricts sur le nombre de requêtes acceptées pour prévenir les attaques par déni de service (DoS).
 
+### Protection des Entêtes avec Helmet
+
+Nous protégerons nos applications Express.js en utilisant **Helmet**, un ensemble de middleware pour sécuriser les applications Express en définissant divers en-têtes HTTP. Cela inclura la protection contre les attaques **XSS** (Cross-Site Scripting), le contrôle de la politique de contenu, la prévention de l'ouverture de fenêtres contextuelles indésirables (**CSP** (Content Security Policy) ), entre autres.  
+Grâce à **Nextjs**, la mise en œuvre de ces mesures de sécurité sera simplifiée, nous permettant de garantir une base solide pour la protection de l’environnement numérique de nos utilisateurs.
+
 ### Gestion des Identités Utilisateurs avec les UUID
 
-Nous utiliserons des **UUID** (Universally Unique IDentifiers) pour renforcer la sécurité et la confidentialité des données des utilisateurs. Les UUID, générés de manière aléatoire, rendront difficile la prédiction des identifiants et contribueront à la protection contre les tentatives d'accès non autorisé.
+Nous utiliserons des **UUID** (Universally Unique IDentifiers) pour renforcer la sécurité et la confidentialité des données des utilisateurs. Les UUID, générés de manière aléatoire, rendront difficile la prédiction des identifiants et contribueront à la protection contre les tentatives d'accès non autorisé. L'itération sur les entrées des tables sera très difficile, voire impossible pour un attaquant comparé à la méthode standard d'utiliser des identifiants qui s'incrémentent. 
 
 ### Transmission Sécurisée des Mots de Passe
 
