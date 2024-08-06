@@ -1,5 +1,5 @@
 // src/entity/comment.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
 import { User } from './user';
 import { Ressource } from './ressource';
 
@@ -26,11 +26,14 @@ export class Comment {
 
   @ManyToOne(() => User, (user) => user.comments)
   @JoinColumn({ name: 'user_uuid' })
-  user!: User;
+  user!: Relation<User>;
+
+
+    
 
   @ManyToOne(() => Ressource, (ressource) => ressource.comments)
   @JoinColumn({ name: 'ressource_uuid' })
-  ressource!: Ressource;
+  ressource!: Relation<Ressource>;
 
   replies!: Comment[];
 }

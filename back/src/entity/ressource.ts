@@ -1,5 +1,5 @@
 // src/entity/ressource.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn } from 'typeorm';
+import { Relation, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn } from 'typeorm';
 import { User } from './user';
 import { RessourceType } from './ressourceType';
 import { RessourceStatus } from './ressourceStatus';
@@ -32,27 +32,27 @@ export class Ressource {
 
   @ManyToOne(() => User, (user) => user.ressources)
   @JoinColumn({ name: 'user_uuid' })
-  user!: User;
+  user!: Relation<User>;
 
   @ManyToOne(() => RessourceType, (ressourceType) => ressourceType.ressources)
   @JoinColumn({ name: 'ressource_type_uuid' })
-  ressourceType!: RessourceType;
+  ressourceType!: Relation<RessourceType>;
 
   @ManyToOne(() => RessourceStatus, (ressourceStatus) => ressourceStatus.ressources)
   @JoinColumn({ name: 'ressource_status_uuid' })
-  ressourceStatus!: RessourceStatus;
+  ressourceStatus!: Relation<RessourceStatus>;
 
   @ManyToOne(() => User, (user) => user.ressources)
   @JoinColumn({ name: 'user_uuid_1' })
-  updatedBy!: User;
+  updatedBy!: Relation<User>;
 
   @OneToMany(() => Comment, (comment) => comment.ressource)
-  comments!: Comment[];
+  comments!: Relation<Comment[]>;
 
   @OneToMany(() => RessourceStatusHistory, (statusHistory) => statusHistory.ressource)
-  statusHistory!: RessourceStatusHistory[];
+  statusHistory!: Relation<RessourceStatusHistory[]>;
 
   @ManyToMany(() => Tag, (tag) => tag.ressources)
-  tags!: Tag[];
+  tags!: Relation<Tag[]>;
     sharingSessions: any;
 }

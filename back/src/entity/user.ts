@@ -1,5 +1,5 @@
 // src/entity/user.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn, Relation } from 'typeorm';
 import { Roles } from './role';
 import { Ressource } from './ressource';
 import { Comment } from './comment';
@@ -31,20 +31,20 @@ export class User {
 
   @ManyToOne(() => Roles, (role) => role.users)
   @JoinColumn({ name: 'role_uuid' })
-  role!: Roles;
+  role!: Relation<Roles>;
 
   @OneToMany(() => Ressource, (ressource) => ressource.user)
-  ressources!: Ressource[];
+  ressources!: Relation<Ressource[]>;
 
   @OneToMany(() => Comment, (comment) => comment.user)
-  comments!: Comment[];
+  comments!: Relation<Comment[]>;
 
   @OneToMany(() => SharingSession, (sharingSession) => sharingSession.user)
-  sharingSessions!: SharingSession[];
+  sharingSessions!: Relation<SharingSession[]>;
 
   @ManyToMany(() => Follow, (follow) => follow.user)
-  following!: Follow[];
+  following!: Relation<Follow[]>;
 
   @ManyToMany(() => Follow, (follow) => follow.follower)
-  followers!: Follow[];
+  followers!: Relation<Follow[]>;
 }

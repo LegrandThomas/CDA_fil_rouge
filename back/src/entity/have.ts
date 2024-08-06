@@ -1,5 +1,5 @@
 // src/entity/have.ts
-import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Relation, Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Tag } from './tag';
 import { Ressource } from './ressource';
 
@@ -13,9 +13,9 @@ export class Have {
 
   @ManyToOne(() => Tag)
   @JoinColumn({ name: 'tag_uuid' })
-  tag!: Tag;
+  tag!: Relation<Tag>;
 
   @ManyToOne(() => Ressource)
   @JoinColumn({ name: 'ressource_uuid' })
-  ressource!: Ressource;
+  ressource!: Relation<Ressource>;
 }

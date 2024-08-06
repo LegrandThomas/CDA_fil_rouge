@@ -1,5 +1,5 @@
 // src/entity/follow.ts
-import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Relation, Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from './user';
 
 @Entity('follow')
@@ -12,9 +12,9 @@ export class Follow {
 
   @ManyToOne(() => User, (user) => user.following)
   @JoinColumn({ name: 'user_uuid' })
-  user!: User;
+  user!: Relation<User>;
 
   @ManyToOne(() => User, (user) => user.followers)
   @JoinColumn({ name: 'user_uuid_1' })
-  follower!: User;
+  follower!: Relation<User>;
 }

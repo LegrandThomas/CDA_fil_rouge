@@ -1,5 +1,5 @@
 // src/entity/refer.ts
-import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Relation, Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Tag } from './tag';
 import { SharingSession } from './sharingSession';
 
@@ -13,9 +13,9 @@ export class Refer {
 
   @ManyToOne(() => Tag)
   @JoinColumn({ name: 'tag_uuid' })
-  tag!: Tag;
+  tag!: Relation<Tag>;
 
   @ManyToOne(() => SharingSession)
   @JoinColumn({ name: 'sharing_session_uuid' })
-  sharingSession!: SharingSession;
+  sharingSession!: Relation<SharingSession>;
 }

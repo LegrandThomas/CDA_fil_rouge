@@ -1,5 +1,5 @@
 // src/entity/ressourceStatusHistory.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Relation, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Ressource } from './ressource';
 
 @Entity('ressources_status_history')
@@ -24,5 +24,5 @@ export class RessourceStatusHistory {
 
   @ManyToOne(() => Ressource, (ressource) => ressource.statusHistory)
   @JoinColumn({ name: 'ressource_uuid' })
-  ressource!: Ressource;
+  ressource!: Relation<Ressource>;
 }
