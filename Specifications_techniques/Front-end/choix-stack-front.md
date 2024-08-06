@@ -1,5 +1,3 @@
-<img src="../../Assets/Images/podium.png" alt="Podium" width="200">
-
 # Comparatif frameworks Front-end
 
 Dans le processus de conception et de développement de notre application, le choix des technologies et des outils est une étape cruciale qui impactera directement la qualité, la performance et la maintenabilité de notre produit final.  
