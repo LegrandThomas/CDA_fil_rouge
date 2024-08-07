@@ -1,5 +1,5 @@
 // src/entity/reference.ts
-import { Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Relation, Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Ressource } from './ressource';
 import { SharingSession } from './sharingSession';
 
@@ -13,9 +13,9 @@ export class Reference {
 
   @ManyToOne(() => Ressource)
   @JoinColumn({ name: 'ressource_uuid' })
-  ressource!: Ressource;
+  ressource!: Relation<Ressource>;
 
   @ManyToOne(() => SharingSession)
   @JoinColumn({ name: 'sharing_session_uuid' })
-  sharingSession!: SharingSession;
+  sharingSession!: Relation<SharingSession>;
 }

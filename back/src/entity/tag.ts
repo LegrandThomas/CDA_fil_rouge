@@ -1,5 +1,5 @@
 // src/entity/tag.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, Relation } from 'typeorm';
 import { Ressource } from './ressource';
 
 @Entity('tags')
@@ -22,6 +22,6 @@ export class Tag {
     joinColumn: { name: 'tag_uuid', referencedColumnName: 'tag_uuid' },
     inverseJoinColumn: { name: 'ressource_uuid', referencedColumnName: 'ressource_uuid' }
   })
-  ressources!: Ressource[];
+  ressources!: Relation<Ressource[]>;
     sharingSessions: any;
 }

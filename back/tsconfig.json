@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types"
-    ],
     "lib": [
       "dom",
       "dom.iterable",
@@ -13,14 +9,14 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "module": "CommonJS",
+    "module": "commonjs",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": "./",
     "plugins": [
       {
@@ -28,18 +24,17 @@
       }
     ],
     "paths": {
-      "@/": [
-        "./"
+      "@/*": [
+        "./src/*"
       ]
     },
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true
+    "moduleResolution": "node"
   },
   "include": [
     "next-env.d.ts",
-    "/*.ts",
-    "/.tsx",
-    ".next/types/**/.ts"
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

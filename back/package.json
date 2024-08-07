@@ -3,20 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "migration:generate": "npm run typeorm -- migration:generate ./src/migration/InitialMigration -d ./data-source.ts",
     "migration:run": "npm run typeorm -- migration:run -d ./data-source.ts",
-    "build:migrations": "tsc -p tsconfig.migrations.json",
-    "seed:generate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed:create",
-    "seed:run": "npm run typeorm seed:run -d ./data-source.ts",
-    "seed:revert": "npm run typeorm -- migration:revert -c seed"
+    "build:migrations": "tsc -p tsconfig.migrations.json"
   },
   "dependencies": {
+    "class-validator": "^0.14.1",
+    "cors": "^2.8.5",
     "next": "14.2.5",
+    "nextjs-cors": "^2.2.0",
     "node-ts": "^6.1.0",
     "pg": "^8.12.0",
     "react": "^18",
@@ -26,7 +26,9 @@
     "winston": "^3.13.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "^20",
+    "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",

@@ -1,5 +1,5 @@
 // src/entity/ressourceType.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Relation, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Ressource } from './ressource';
 
 @Entity('ressources_types')
@@ -17,5 +17,5 @@ export class RessourceType {
   updated_at!: Date;
 
   @OneToMany(() => Ressource, (ressource) => ressource.ressourceType)
-  ressources!: Ressource[];
+  ressources!: Relation<Ressource[]>;
 }

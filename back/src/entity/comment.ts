@@ -28,6 +28,9 @@ export class Comment {
   @JoinColumn({ name: 'user_uuid' })
   user!: User;
 
+
+    
+
   @ManyToOne(() => Ressource, (ressource) => ressource.comments)
   @JoinColumn({ name: 'ressource_uuid' })
   ressource!: Ressource;

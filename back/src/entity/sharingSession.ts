@@ -1,5 +1,5 @@
 // src/entity/sharingSession.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Relation, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
 import { User } from './user';
 import { Ressource } from './ressource';
 import { Tag } from './tag';
@@ -31,7 +31,7 @@ export class SharingSession {
 
   @ManyToOne(() => User, (user) => user.sharingSessions)
   @JoinColumn({ name: 'user_uuid' })
-  user!: User;
+  user!: Relation<User>;
 
   @ManyToMany(() => Ressource, (ressource) => ressource.sharingSessions)
   @JoinTable({
@@ -39,7 +39,7 @@ export class SharingSession {
     joinColumn: { name: 'sharing_session_uuid', referencedColumnName: 'sharing_session_uuid' },
     inverseJoinColumn: { name: 'ressource_uuid', referencedColumnName: 'ressource_uuid' }
   })
-  ressources!: Ressource[];
+  ressources!: Relation<Ressource[]>;
 
   @ManyToMany(() => Tag, (tag) => tag.sharingSessions)
   @JoinTable({
@@ -47,5 +47,5 @@ export class SharingSession {
     joinColumn: { name: 'sharing_session_uuid', referencedColumnName: 'sharing_session_uuid' },
     inverseJoinColumn: { name: 'tag_uuid', referencedColumnName: 'tag_uuid' }
   })
-  tags!: Tag[];
+  tags!: Relation<Tag[]>;
 }
