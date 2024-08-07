@@ -12,4 +12,5 @@ RUN npm run build
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "npx ts-node ./run-migrations.ts && npm run start"]
+# CMD ["sh", "-c", "npx ts-node ./run-migrations.ts && npm run start"]
+CMD ["npm", "run", "start"]
