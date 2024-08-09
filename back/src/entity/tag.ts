@@ -1,13 +1,14 @@
 // src/entity/tag.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, Relation } from 'typeorm';
-import { Ressource } from './ressource';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from 'typeorm'
+import { Ressource } from './Ressource'
+import type {Relation} from 'typeorm'
 
-@Entity('tags')
+@Entity()
 export class Tag {
   @PrimaryGeneratedColumn('uuid')
   tag_uuid!: string;
 
-  @Column({ length: 100 })
+  @Column({type: 'varchar', length: 100 })
   tag_title!: string;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })

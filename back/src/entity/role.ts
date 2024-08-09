@@ -1,12 +1,12 @@
-import { Relation, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
-import { User } from './user';
-
-@Entity('roles')
-export class Roles {
+import {  Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { User } from './User'
+import type {Relation} from 'typeorm'
+@Entity()
+export class Role {
   @PrimaryGeneratedColumn('uuid')
   role_uuid!: string;
 
-  @Column({ length: 100 })
+  @Column({type: 'varchar', length: 100 })
   role_name!: string;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })

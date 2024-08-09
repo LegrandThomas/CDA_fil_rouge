@@ -1,7 +1,7 @@
 // src/entity/comment.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, Relation } from 'typeorm';
-import { User } from './user';
-import { Ressource } from './ressource';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, type Relation } from 'typeorm';
+import { User } from './User';
+import { Ressource } from './Ressource';
 
 @Entity('comments')
 export class Comment {

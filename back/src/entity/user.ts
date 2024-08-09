@@ -1,26 +1,27 @@
 // src/entity/user.ts
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn, Relation } from 'typeorm';
-import { Roles } from './role';
-import { Ressource } from './ressource';
-import { Comment } from './comment';
-import { SharingSession } from './sharingSession';
-import { Follow } from './follow';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn } from 'typeorm';
+import { Role } from './Role';
+import { Ressource } from './Ressource';
+import { Comment } from './Comment';
+import { SharingSession } from './SharingSession';
+import { Follow } from './Follow';
+import type {Relation} from 'typeorm'
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
   user_uuid!: string;
 
-  @Column({ length: 100 })
+  @Column({type: 'varchar', length: 100 })
   username!: string;
 
-  @Column({ length: 100 })
+  @Column({type: 'varchar', length: 100 })
   email!: string;
 
-  @Column({ length: 255 })
+  @Column({type: 'varchar', length: 255 })
   password!: string;
 
-  @Column({ default: true })
+  @Column({type: 'boolean', default: true })
   is_active!: boolean;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
@@ -29,9 +30,9 @@ export class User {
   @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
   updated_at!: Date;
 
-  @ManyToOne(() => Roles, (role) => role.users)
+  @ManyToOne(() => Role, (role) => role.users)
   @JoinColumn({ name: 'role_uuid' })
-  role!: Relation<Roles>;
+  role!: Relation<Role>;
 
   @OneToMany(() => Ressource, (ressource) => ressource.user)
   ressources!: Relation<Ressource[]>;
@@ -48,3 +49,4 @@ export class User {
   @ManyToMany(() => Follow, (follow) => follow.follower)
   followers!: Relation<Follow[]>;
 }
+export default User;

@@ -1,17 +1,16 @@
 // src/entity/sharingSession.ts
-import { Relation, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
-import { User } from './user';
-import { Ressource } from './ressource';
-import { Tag } from './tag';
-import { Reference } from './reference';
-import { Refer } from './refer';
+import {  Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
+import { User } from './User'
+import { Ressource } from './Ressource';
+import { Tag } from './Tag';
+import type {Relation} from 'typeorm'
 
-@Entity('sharing_sessions')
+@Entity()
 export class SharingSession {
   @PrimaryGeneratedColumn('uuid')
   sharing_session_uuid!: string;
 
-  @Column({ length: 255 })
+  @Column({type: 'varchar', length: 255 })
   title!: string;
 
   @Column({ type: 'text', nullable: true })

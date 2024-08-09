@@ -1,24 +1,24 @@
 // src/entity/ressource.ts
-import { Relation, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn } from 'typeorm';
-import { User } from './user';
-import { RessourceType } from './ressourceType';
-import { RessourceStatus } from './ressourceStatus';
-import { Comment } from './comment';
-import { Tag } from './tag';
-import { RessourceStatusHistory } from './ressourceStatusHistory';
-
-@Entity('ressources')
+import {  Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, ManyToMany, JoinColumn } from 'typeorm';
+import { User } from './User';
+import { RessourceType } from './RessourceType';
+import { RessourceStatus } from './RessourceStatus';
+import { Comment } from './Comment';
+import { Tag } from './Tag';
+import { RessourceStatusHistory } from './RessourceStatusHistory';
+import type {Relation} from 'typeorm'
+@Entity()
 export class Ressource {
   @PrimaryGeneratedColumn('uuid')
   ressource_uuid!: string;
 
-  @Column({ length: 50 })
+  @Column({ type: 'varchar', length: 50 })
   title!: string;
 
   @Column({ type: 'text', nullable: true })
   content!: string;
 
-  @Column({ length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: true })
   summary!: string;
 
   @Column({ default: false })

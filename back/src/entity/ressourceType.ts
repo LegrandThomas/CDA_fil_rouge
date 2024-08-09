@@ -1,13 +1,13 @@
 // src/entity/ressourceType.ts
-import { Relation, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
-import { Ressource } from './ressource';
-
-@Entity('ressources_types')
+import {  Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Ressource } from './Ressource';
+import type {Relation} from 'typeorm'
+@Entity()
 export class RessourceType {
   @PrimaryGeneratedColumn('uuid')
   ressource_type_uuid!: string;
 
-  @Column({ length: 50 })
+  @Column({type: 'varchar', length: 50 })
   type_name!: string;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })

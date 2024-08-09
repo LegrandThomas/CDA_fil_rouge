@@ -1,8 +1,8 @@
 // src/entity/refer.ts
-import { Relation, Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Tag } from './tag';
-import { SharingSession } from './sharingSession';
-
+import {  Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Tag } from './Tag';
+import { SharingSession } from './SharingSession';
+import type {Relation} from 'typeorm'
 @Entity('refer')
 export class Refer {
   @PrimaryColumn('uuid')
