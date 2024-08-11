@@ -21,14 +21,27 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            sudo docker stop $(sudo docker ps -a -q) || true
-            sudo docker rm $(sudo docker ps -a -q) || true
+            # Arrêter tous les conteneurs s'ils existent
+            containers=$(sudo docker ps -q)
+            if [ -n "$containers" ]; then
+              sudo docker stop $containers
+            fi
+
+            # Supprimer tous les conteneurs s'ils existent
+            containers=$(sudo docker ps -a -q)
+            if [ -n "$containers" ]; then
+              sudo docker rm $containers
+            fi
+
+            # Vérifier si le répertoire existe, sinon le cloner
             if [ ! -d ~/beginnersAppDev/CDA_fil_rouge ]; then
               mkdir -p ~/beginnersAppDev
               git clone --branch test https://github.com/Florence-Martin/CDA_fil_rouge.git ~/beginnersAppDev/CDA_fil_rouge
             else
               cd ~/beginnersAppDev/CDA_fil_rouge
-              git pull origin test
+              # Réinitialiser les changements locaux à l'état de la branche distante
+              git fetch origin
+              git reset --hard origin/test
             fi
 
   build-and-run-on-vps:
