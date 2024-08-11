@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy to VPS 
+      - name: Deploy to VPS
         uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.VPS_IP }}
@@ -25,7 +25,7 @@ jobs:
             sudo docker rm $(sudo docker ps -a -q) || true
             if [ ! -d ~/beginnersAppDev/CDA_fil_rouge ]; then
               mkdir -p ~/beginnersAppDev
-              git clone --branch test https://github.com/LegrandThomas/CDA_fil_rouge.git ~/beginnersAppDev/CDA_fil_rouge
+              git clone --branch test https://github.com/Florence-Martin/CDA_fil_rouge.git ~/beginnersAppDev/CDA_fil_rouge
             else
               cd ~/beginnersAppDev/CDA_fil_rouge
               git pull origin test
@@ -36,7 +36,7 @@ jobs:
     needs: deploy-on-vps
 
     steps:
-      - name: Build Docker Containers 
+      - name: Build Docker Containers
         uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.VPS_IP }}

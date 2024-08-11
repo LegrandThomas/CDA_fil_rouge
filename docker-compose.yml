@@ -1,9 +1,9 @@
-version: '3.8'
+version: "3.8"
 
-services: 
-  postgres: 
+services:
+  postgres:
     image: postgres:alpine
-    restart: always 
+    restart: always
     environment:
       POSTGRES_USER: user_beginners
       POSTGRES_PASSWORD: pass_beginners
@@ -26,7 +26,7 @@ services:
     depends_on:
       - postgres
     networks:
-      - network-beginners 
+      - network-beginners
 
   frontend:
     build: ./front
@@ -35,7 +35,7 @@ services:
       - "3000:3000"
     networks:
       - network-beginners
-  
+
   nginx:
     image: nginx:alpine
     ports:
@@ -47,7 +47,6 @@ services:
       - api
     networks:
       - network-beginners
-
 
 networks:
   network-beginners:
