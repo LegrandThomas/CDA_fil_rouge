@@ -9,7 +9,18 @@ const userSchema = Joi.object({
   role_uuid: Joi.string().required(),
   username: Joi.string().required(),
   email: Joi.string().email().required(),
-  password: Joi.string().required(),
+  password: Joi.string()
+    .min(12)
+    .pattern(/[A-Z]/, 'uppercase')
+    .pattern(/[a-z]/, 'lowercase')
+    .pattern(/[0-9]/, 'digit')
+    .pattern(/[!@#$%^&*(),.?":{}|<>]/, 'special character')
+    .required()
+    .messages({
+      'string.min': 'Password must be at least 12 characters long',
+      'string.pattern.base': 'Password must include at least one uppercase letter, one lowercase letter, one digit, and one special character',
+      'string.empty': 'Password is required'
+    }),
   is_active: Joi.boolean().required(),
 });
 
@@ -44,43 +55,44 @@ export class UserController {
    */
   async createUser(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const { error } = userSchema.validate(req.body);
-        if (error) {
-            return res.status(400).json({ error: error.details[0].message });
-        }
-
-        const { role_uuid, username, email, password, is_active } = req.body;
-
-        const role = await this.userService.getRoleById(role_uuid);
-        if (!role) {
-            return res.status(404).json({ error: "Role not found" });
-        }
-
-        const hashedPassword = await hashPassword(password);
-
-        const newUser = await this.userService.createUser({
-            role,
-            username: this.sanitizeInput(username),
-            email: this.sanitizeInput(email),
-            password: hashedPassword,
-            is_active
-        });
-
-        return res.status(201).json(newUser);
-
+      const { error } = userSchema.validate(req.body);
+      if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+      }
+  
+      const { role_uuid, username, email, password, is_active } = req.body;
+  
+      const role = await this.userService.getRoleById(role_uuid);
+      if (!role) {
+        return res.status(404).json({ error: "Role not found" });
+      }
+  
+      const hashedPassword = await hashPassword(password);
+  
+      const newUser = await this.userService.createUser({
+        role,
+        username: this.sanitizeInput(username),
+        email: this.sanitizeInput(email),
+        password: hashedPassword,
+        is_active
+      });
+  
+      return res.status(201).json(newUser);
+  
     } catch (error) {
-        if (error instanceof UniqueConstraintViolationError) {
-            return res.status(409).json({ error: error.message });
-        }
-
-        if (error instanceof EntityNotFoundError) {
-            return res.status(404).json({ error: error.message });
-        }
-
-        console.error("Error creating user:", error);
-        return res.status(500).json({ error: "Internal server error" });
+      if (error instanceof UniqueConstraintViolationError) {
+        return res.status(409).json({ error: error.message });
+      }
+  
+      if (error instanceof EntityNotFoundError) {
+        return res.status(404).json({ error: error.message });
+      }
+  
+      console.error("Error creating user:", error);
+      return res.status(500).json({ error: "Internal server error" });
     }
-}
+  }
+  
 
   /**
    * Retrieves all users from the database.
@@ -148,6 +160,7 @@ export class UserController {
     }
   }
 
+
   /**
    * Updates specific fields of a user by their UUID.
    * @param req - The API request object.
@@ -173,7 +186,23 @@ export class UserController {
       const updatedFields: any = {};
       if (username) updatedFields.username = this.sanitizeInput(username);
       if (email) updatedFields.email = this.sanitizeInput(email);
-      if (password) updatedFields.password = await hashPassword(password);
+      if (password) {
+        // Validate the password before hashing
+        const { error } = Joi.object({
+          password: Joi.string()
+            .min(12)
+            .pattern(/[A-Z]/, 'uppercase')
+            .pattern(/[a-z]/, 'lowercase')
+            .pattern(/[0-9]/, 'digit')
+            .pattern(/[!@#$%^&*(),.?":{}|<>]/, 'special character')
+            .required()
+        }).validate({ password });
+        
+        if (error) {
+          return res.status(400).json({ error: error.details[0].message });
+        }
+        updatedFields.password = await hashPassword(password);
+      }
 
       const updatedUser = await this.userService.updateUserFields(user_uuid, updatedFields);
       if (updatedUser) {
@@ -186,6 +215,8 @@ export class UserController {
       res.status(500).json({ error: "Error updating user" });
     }
   }
+
+
 
   /**
    * Replaces a user with new data.
@@ -208,8 +239,21 @@ export class UserController {
       if (!email || typeof email !== 'string' || !this.isValidEmail(email)) {
         return res.status(400).json({ error: "A valid email is required" });
       }
-      if (!password || typeof password !== 'string') {
-        return res.status(400).json({ error: "password is required and must be a string" });
+      if (password) {
+        // Validate the password before hashing
+        const { error } = Joi.object({
+          password: Joi.string()
+            .min(12)
+            .pattern(/[A-Z]/, 'uppercase')
+            .pattern(/[a-z]/, 'lowercase')
+            .pattern(/[0-9]/, 'digit')
+            .pattern(/[!@#$%^&*(),.?":{}|<>]/, 'special character')
+            .required()
+        }).validate({ password });
+        
+        if (error) {
+          return res.status(400).json({ error: error.details[0].message });
+        }
       }
       if (typeof is_active !== 'boolean') {
         return res.status(400).json({ error: "is_active is required and must be a boolean" });
@@ -222,7 +266,7 @@ export class UserController {
         }
       }
 
-      const hashedPassword = await hashPassword(password);
+      const hashedPassword = password ? await hashPassword(password) : '';
 
       const updatedUser = await this.userService.replaceUser(user_uuid, {
         username: this.sanitizeInput(username),
@@ -241,6 +285,7 @@ export class UserController {
       res.status(500).json({ error: "Error updating user" });
     }
   }
+
 
   /**
    * Deletes a user by their UUID.
