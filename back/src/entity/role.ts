@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, Unique } from 'typeorm';
 import { User } from './user';
 import type { Relation } from 'typeorm';
 
@@ -6,6 +6,7 @@ import type { Relation } from 'typeorm';
  * Represents a role within the system.
  */
 @Entity('roles')
+@Unique(["role_name"])
 export class Role {
   // Unique identifier for the role
   @PrimaryGeneratedColumn('uuid')

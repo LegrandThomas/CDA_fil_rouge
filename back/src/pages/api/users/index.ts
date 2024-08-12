@@ -1,7 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { initializeDataSource } from '../../../data-source';
 import { UserController } from "@/controllers/userController";
+import { UserService } from "@/services/userService";
 import Cors from 'nextjs-cors';
+
+const userService = new UserService();
+const userController = new UserController(userService);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await initializeDataSource();
@@ -10,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     origin: 'http://localhost:3000'
   });
 
-  const userController = new UserController();
+  
 
   switch (req.method) {
     case "POST":

@@ -25,7 +25,11 @@ const userSchema = Joi.object({
 });
 
 export class UserController {
-  private userService = new UserService();
+  private userService: UserService;
+
+  constructor(userService: UserService) {
+    this.userService = userService;
+  }
 
   /**
    * Validates whether the provided email follows a standard format.

@@ -1,5 +1,4 @@
-// app/page.tsx
-"use client"
+"use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -11,10 +10,17 @@ interface User {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  role: Role;
+}
+
+interface Role {
+  role_uuid: string;
+  role_name: string;
 }
 
 export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,7 +29,7 @@ export default function Home() {
       try {
         const res = await fetch("/api/users");
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data: User[] = await res.json();
         setUsers(data);
@@ -34,7 +40,23 @@ export default function Home() {
       }
     }
 
+    async function fetchRoles() {
+      try {
+        const res = await fetch("/api/roles");
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data: Role[] = await res.json();
+        setRoles(data);
+      } catch (error: any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
     fetchUsers();
+    fetchRoles();
   }, []);
 
   if (loading) return <p>Loading...</p>;
@@ -43,7 +65,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
+        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
           <code className="font-mono font-bold">app/page.tsx</code>
         </p>
@@ -78,28 +100,60 @@ export default function Home() {
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <h2 className="mb-3 text-2xl font-semibold">Users List</h2>
-        <table className="w-full border-collapse border border-gray-200">
-          <thead>
-            <tr>
-              <th className="border border-gray-300 p-2">UUID</th>
-              <th className="border border-gray-300 p-2">Username</th>
-              <th className="border border-gray-300 p-2">Email</th>
-              <th className="border border-gray-300 p-2">Active</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map(user => (
-              <tr key={user.user_uuid}>
-                <td className="border border-gray-300 p-2">{user.user_uuid}</td>
-                <td className="border border-gray-300 p-2">{user.username}</td>
-                <td className="border border-gray-300 p-2">{user.email}</td>
-                <td className="border border-gray-300 p-2">{user.is_active ? "Yes" : "No"}</td>
+      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:text-left">
+        <div className="mb-6">
+          <h2 className="mb-3 text-2xl font-semibold">Users List</h2>
+          <table className="w-full border-collapse border border-gray-200">
+            <thead>
+              <tr>
+                <th className="border border-gray-300 p-2">UUID</th>
+                <th className="border border-gray-300 p-2">Username</th>
+                <th className="border border-gray-300 p-2">Email</th>
+                <th className="border border-gray-300 p-2">Role</th>
+                <th className="border border-gray-300 p-2">Active</th>
+                <th className="border border-gray-300 p-2">Date de création</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.user_uuid}>
+                  <td className="border border-gray-300 p-2">{user.user_uuid}</td>
+                  <td className="border border-gray-300 p-2">{user.username}</td>
+                  <td className="border border-gray-300 p-2">{user.email}</td>
+                  <td className="border border-gray-300 p-2">
+                    {user.role ? user.role.role_name : "No Role"}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {user.is_active ? "Yes" : "No"}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                  {new Date(user.created_at).toLocaleDateString()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h2 className="mb-3 mt-6 text-2xl font-semibold">Roles List</h2>
+          <table className="w-full border-collapse border border-gray-200">
+            <thead>
+              <tr>
+                <th className="border border-gray-300 p-2">UUID</th>
+                <th className="border border-gray-300 p-2">Role Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {roles.map((role) => (
+                <tr key={role.role_uuid}>
+                  <td className="border border-gray-300 p-2">{role.role_uuid}</td>
+                  <td className="border border-gray-300 p-2">{role.role_name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </main>
   );
