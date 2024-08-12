@@ -22,7 +22,7 @@ export const AppDataSource = new DataSource({
     username: "user_beginners",
     password: "pass_beginners",
     database: "db_beginners",
-    synchronize: false,
+    synchronize: true,
     logging: "all",
     entities: [User, Role, Comment, Tag, Have, Ressource, RessourceStatus, RessourceStatusHistory, Follow, Refer, Reference, RessourceType, SharingSession],
     migrations: [InitMigration1723112057042],
