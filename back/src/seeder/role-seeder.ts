@@ -1,4 +1,4 @@
-import { AppDataSource } from './../../data-source';
+import { AppDataSource } from './../data-source';
 import { Role} from '../entity/role';
 
 const seedRoles = async () => {

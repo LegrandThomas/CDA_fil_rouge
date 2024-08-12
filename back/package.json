@@ -1,6 +1,7 @@
 {
   "name": "back",
   "version": "0.1.0",
+  "type": "module" ,
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
@@ -9,7 +10,7 @@
     "lint": "next lint",
     "typeorm": "typeorm-ts-node-esm",
     "migration:generate": "npm run typeorm -- migration:generate ./src/migration/InitialMigration -d ./data-source.ts",
-    "migration:run": "npm run typeorm -- migration:run -d ./data-source.ts"
+    "migration:run": "npm run typeorm -- migration:run -d .src/data-source.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

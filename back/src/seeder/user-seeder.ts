@@ -1,5 +1,5 @@
 // src/seeder/user-seeder.ts
-import { AppDataSource } from "./../../data-source";
+import { AppDataSource } from "./../data-source";
 import { User } from "../entity/user";
 import { Role } from "../entity/role";
 
